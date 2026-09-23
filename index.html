@@ -506,6 +506,47 @@ footer a { color: var(--text-dim); }
         </div>
       </div>
     </div>
+
+    <hr class="example-sep">
+
+    <div class="retrieval-example">
+      <h3 class="example-label">video364</h3>
+      <div class="spectro-wrap" data-video="video364" data-left="0.058" data-right="0.997" data-top="0.03" data-bottom="0.85" data-duration="2664.0535">
+        <img src="static/images/video364_mel_web.png" alt="Mel spectrogram of video364 with oracle events (blue) and AudioHelix's retrieved 5s units (green)">
+        <div class="playhead"></div>
+      </div>
+      <div class="spectro-legend">
+        <span class="sw"><i class="sw-oracle"></i> Oracle event</span>
+        <span class="sw"><i class="sw-ours"></i> Ours: retrieved 5&nbsp;s unit</span>
+      </div>
+      <div class="audio-row">
+        <span class="audio-label">ORIGINAL AUDIO</span>
+        <audio controls preload="metadata" src="static/audio/video364_original.mp3"></audio>
+      </div>
+      <div class="qa-card">
+        <span class="qa-tag">Query</span>
+        <p class="qa-question">According to the narration, what combination of reasons explains why humpback whales make their annual trip between Hawaii and Alaska, and what special ability helps them stay connected during that long journey?</p>
+        <div class="qa-options">
+          <div class="qa-option">
+            <span class="qa-letter">A</span>
+            <span>They leave Hawaii each year to feed in its rich coastal waters and then travel to Alaska mainly to avoid predators, maintaining contact along the way with short&#8209;range clicks that only carry a few miles.</span>
+          </div>
+          <div class="qa-option qa-correct">
+            <span class="qa-letter">B</span>
+            <span>They leave Alaska each year for Hawaii&rsquo;s warmer, predator-sheltered waters where they breed and nurse calves despite there being no food, then return once the calves are strong enough for the 3,000&#8209;mile journey, staying in constant contact with low&#8209;frequency calls that can travel up to 10,000 miles.</span>
+            <span class="qa-check">&#10003; Correct</span>
+          </div>
+          <div class="qa-option">
+            <span class="qa-letter">C</span>
+            <span>They shuttle back and forth between Hawaii and Alaska throughout the year primarily to follow shifting fish schools for food, relying on high&#8209;pitched songs that echo off the seafloor rather than long&#8209;distance calls to stay in touch.</span>
+          </div>
+          <div class="qa-option">
+            <span class="qa-letter">D</span>
+            <span>They migrate from Alaska to Hawaii mainly to feed in clear, shallow waters and to clean parasites like the sea turtle does at the reef, then head back once food runs out, using visual cues instead of sound to keep track of one another over the open ocean.</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
