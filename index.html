@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AudioHelix</title>
+<title>AudioHelix — Hierarchical Dual-Graph Retrieval for Long-form Audio Reasoning</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -18,7 +18,9 @@
   --text-faint: #999;
   --link: #4a7cf7;
   --border: #e8e8e8;
-  --accent: #2fb098;
+  --accent: #6366f1;
+  --accent2: #a855f7;
+  --accent-grad: linear-gradient(100deg, var(--accent), var(--accent2));
   --maxw: 960px;
   --body: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -241,7 +243,7 @@ th {
 }
 td:first-child, th:first-child { text-align: left; }
 tbody tr:last-child td { border-bottom: none; }
-.row-ours { background: #f0faf7; }
+.row-ours { background: #f4f3fe; }
 .row-ours td:first-child { color: var(--accent); font-weight: 700; }
 .best { color: var(--accent); font-weight: 700; }
 .second { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--text-faint); }
@@ -301,7 +303,15 @@ footer a { color: var(--text-dim); }
 
 <header class="hero">
   <div class="container">
-    <h1>Audio Helix</h1>
+    <h1>Hierarchical Dual-Graph Retrieval for Long-form Audio Reasoning</h1>
+
+    <div class="authors">
+      Eunsang Lee<span class="eq">*</span>,&ensp;
+      Taein Ju<span class="eq">*</span>,&ensp;
+      Jiyoung Lee<sup>&dagger;</sup>
+    </div>
+    <div class="affil">Division of Artificial Intelligence &amp; Software, Ewha Womans University</div>
+    <div class="note"><span class="eq">*</span> Equal contribution&ensp;·&ensp;<sup>&dagger;</sup> Corresponding author</div>
   </div>
 </header>
 
