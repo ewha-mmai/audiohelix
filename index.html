@@ -370,18 +370,18 @@ footer a { color: var(--text-dim); }
 .qa-question { font-size: 16px; font-weight: 600; line-height: 1.6; margin: 0 0 18px; max-width: none; }
 .qa-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .qa-option {
-  display: flex; gap: 10px; align-items: flex-start;
-  padding: 12px 40px 12px 14px;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 12px 14px;
   border: 1px solid var(--border); border-radius: 8px;
   background: var(--bg);
   font-size: 14px; line-height: 1.55; color: var(--text-dim);
-  position: relative;
 }
+.qa-option-row { display: flex; gap: 10px; align-items: flex-start; }
 .qa-letter { font-family: var(--mono); font-weight: 700; color: var(--text-faint); flex-shrink: 0; }
 .qa-correct { border-color: var(--accent); background: #f4f3fe; color: var(--text); }
 .qa-correct .qa-letter { color: var(--accent); }
 .qa-check {
-  position: absolute; top: 10px; right: 12px;
+  align-self: flex-end;
   font-size: 11px; font-weight: 700; color: var(--accent);
   white-space: nowrap;
 }
@@ -446,21 +446,29 @@ footer a { color: var(--text-dim); }
         <p class="qa-question">As the performance shifts from the large male dancer group to the solo unicyclist and then into the later mixed unicycle/dancer rope and pyramid segments, how does the background music behave across these transitions?</p>
         <div class="qa-options">
           <div class="qa-option">
-            <span class="qa-letter">A</span>
-            <span>Each segment (male dancers, solo unicyclist, and later mixed unicycle/dancer acts) uses its own distinct track, with noticeable changes in tempo and instrumentation at every transition.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">A</span>
+              <span>Each segment (male dancers, solo unicyclist, and later mixed unicycle/dancer acts) uses its own distinct track, with noticeable changes in tempo and instrumentation at every transition.</span>
+            </div>
           </div>
           <div class="qa-option">
-            <span class="qa-letter">B</span>
-            <span>The soundtrack starts as full EDM for the male dancers, then drops to a sparse, drum-only percussive section during the solo unicyclist, before adding melodies back in only for the later unicycle pyramids.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">B</span>
+              <span>The soundtrack starts as full EDM for the male dancers, then drops to a sparse, drum-only percussive section during the solo unicyclist, before adding melodies back in only for the later unicycle pyramids.</span>
+            </div>
           </div>
           <div class="qa-option qa-correct">
-            <span class="qa-letter">C</span>
-            <span>A single, upbeat, driving electronic dance track with synth melodies and strong percussion continues across all of these segments without changing to a different musical style.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">C</span>
+              <span>A single, upbeat, driving electronic dance track with synth melodies and strong percussion continues across all of these segments without changing to a different musical style.</span>
+            </div>
             <span class="qa-check">&#10003; Correct</span>
           </div>
           <div class="qa-option">
-            <span class="qa-letter">D</span>
-            <span>The music switches from upbeat EDM during the large male dancer group to a slower, more acoustic-style track for the solo unicyclist, then returns to EDM for the mixed unicycle/dancer segments.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">D</span>
+              <span>The music switches from upbeat EDM during the large male dancer group to a slower, more acoustic-style track for the solo unicyclist, then returns to EDM for the mixed unicycle/dancer segments.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -487,21 +495,29 @@ footer a { color: var(--text-dim); }
         <p class="qa-question">According to the narrator, how did Miuccia Prada&rsquo;s early use of nylon eventually lead to the Linea Rossa/Prada Sport concept, and how was that line later positioned within Prada&rsquo;s collections and strategy?</p>
         <div class="qa-options">
           <div class="qa-option qa-correct">
-            <span class="qa-letter">A</span>
-            <span>Miuccia first reinvented Prada by unveiling waterproof nylon bags, and this nylon innovation later evolved into the high-end, functional Prada Sport line in 1997; decades afterward, its Linea Rossa identity was folded back into the Fall/Winter 2018 collections and explicitly cited as a key &lsquo;reintroduction&rsquo; in Prada&rsquo;s future-focused investment strategy.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">A</span>
+              <span>Miuccia first reinvented Prada by unveiling waterproof nylon bags, and this nylon innovation later evolved into the high-end, functional Prada Sport line in 1997; decades afterward, its Linea Rossa identity was folded back into the Fall/Winter 2018 collections and explicitly cited as a key &lsquo;reintroduction&rsquo; in Prada&rsquo;s future-focused investment strategy.</span>
+            </div>
             <span class="qa-check">&#10003; Correct</span>
           </div>
           <div class="qa-option">
-            <span class="qa-letter">B</span>
-            <span>Miuccia&rsquo;s early nylon accessories directly inspired the launch of Miu Miu as a playful sub-label, which then introduced the red-line branding; this Miu Miu red stripe was subsequently absorbed into Prada&rsquo;s main runway in 2018 and mentioned alongside Raf Simons as the sole driver of Prada&rsquo;s future.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">B</span>
+              <span>Miuccia&rsquo;s early nylon accessories directly inspired the launch of Miu Miu as a playful sub-label, which then introduced the red-line branding; this Miu Miu red stripe was subsequently absorbed into Prada&rsquo;s main runway in 2018 and mentioned alongside Raf Simons as the sole driver of Prada&rsquo;s future.</span>
+            </div>
           </div>
           <div class="qa-option">
-            <span class="qa-letter">C</span>
-            <span>After nylon bags boosted Prada&rsquo;s popularity, the material was largely abandoned when Neil Barrett arrived, as Prada Sport was framed as a leather-based luxury line; Linea Rossa resurfaced only as a nostalgic capsule for Fall/Winter 2018 and was portrayed as separate from Prada&rsquo;s broader strategic investments.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">C</span>
+              <span>After nylon bags boosted Prada&rsquo;s popularity, the material was largely abandoned when Neil Barrett arrived, as Prada Sport was framed as a leather-based luxury line; Linea Rossa resurfaced only as a nostalgic capsule for Fall/Winter 2018 and was portrayed as separate from Prada&rsquo;s broader strategic investments.</span>
+            </div>
           </div>
           <div class="qa-option">
-            <span class="qa-letter">D</span>
-            <span>Miuccia&rsquo;s nylon work laid the groundwork for Neil Barrett&rsquo;s minimalist menswear, but the narrator stresses that Prada Sport was purely about elegant tailoring with no real link to nylon, and that Linea Rossa&rsquo;s 2018 appearance was a brief revival not referenced in the discussion of Prada&rsquo;s long-term plans.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">D</span>
+              <span>Miuccia&rsquo;s nylon work laid the groundwork for Neil Barrett&rsquo;s minimalist menswear, but the narrator stresses that Prada Sport was purely about elegant tailoring with no real link to nylon, and that Linea Rossa&rsquo;s 2018 appearance was a brief revival not referenced in the discussion of Prada&rsquo;s long-term plans.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -528,21 +544,29 @@ footer a { color: var(--text-dim); }
         <p class="qa-question">According to the narration, what combination of reasons explains why humpback whales make their annual trip between Hawaii and Alaska, and what special ability helps them stay connected during that long journey?</p>
         <div class="qa-options">
           <div class="qa-option">
-            <span class="qa-letter">A</span>
-            <span>They leave Hawaii each year to feed in its rich coastal waters and then travel to Alaska mainly to avoid predators, maintaining contact along the way with short&#8209;range clicks that only carry a few miles.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">A</span>
+              <span>They leave Hawaii each year to feed in its rich coastal waters and then travel to Alaska mainly to avoid predators, maintaining contact along the way with short&#8209;range clicks that only carry a few miles.</span>
+            </div>
           </div>
           <div class="qa-option qa-correct">
-            <span class="qa-letter">B</span>
-            <span>They leave Alaska each year for Hawaii&rsquo;s warmer, predator-sheltered waters where they breed and nurse calves despite there being no food, then return once the calves are strong enough for the 3,000&#8209;mile journey, staying in constant contact with low&#8209;frequency calls that can travel up to 10,000 miles.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">B</span>
+              <span>They leave Alaska each year for Hawaii&rsquo;s warmer, predator-sheltered waters where they breed and nurse calves despite there being no food, then return once the calves are strong enough for the 3,000&#8209;mile journey, staying in constant contact with low&#8209;frequency calls that can travel up to 10,000 miles.</span>
+            </div>
             <span class="qa-check">&#10003; Correct</span>
           </div>
           <div class="qa-option">
-            <span class="qa-letter">C</span>
-            <span>They shuttle back and forth between Hawaii and Alaska throughout the year primarily to follow shifting fish schools for food, relying on high&#8209;pitched songs that echo off the seafloor rather than long&#8209;distance calls to stay in touch.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">C</span>
+              <span>They shuttle back and forth between Hawaii and Alaska throughout the year primarily to follow shifting fish schools for food, relying on high&#8209;pitched songs that echo off the seafloor rather than long&#8209;distance calls to stay in touch.</span>
+            </div>
           </div>
           <div class="qa-option">
-            <span class="qa-letter">D</span>
-            <span>They migrate from Alaska to Hawaii mainly to feed in clear, shallow waters and to clean parasites like the sea turtle does at the reef, then head back once food runs out, using visual cues instead of sound to keep track of one another over the open ocean.</span>
+            <div class="qa-option-row">
+              <span class="qa-letter">D</span>
+              <span>They migrate from Alaska to Hawaii mainly to feed in clear, shallow waters and to clean parasites like the sea turtle does at the reef, then head back once food runs out, using visual cues instead of sound to keep track of one another over the open ocean.</span>
+            </div>
           </div>
         </div>
       </div>
