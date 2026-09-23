@@ -421,33 +421,6 @@ footer a { color: var(--text-dim); }
 <hr class="sep">
 
 <section>
-  <div class="container">
-    <h2>The Problem</h2>
-    <p class="centered" style="color:var(--text-dim);">
-      Answering questions about long-form audio often requires connecting evidence across distant moments. Existing approaches either process the entire recording at high computational cost or retrieve isolated chunks, missing the connections between complementary evidence.
-    </p>
-    <figure>
-      <img class="fig-narrow" src="static/images/fig1_problem.png" alt="Two example dialogues: a user asks a multi-hop question about a long recording, and the answer draws on several distant, linked spans of the audio.">
-      <figcaption><b>Figure 1.</b> Long-form and multi-hop audio reasoning requires concentrating on different hops to answer each query.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<hr class="sep">
-
-<section>
-  <div class="container">
-    <h2>Method</h2>
-    <figure>
-      <img src="static/images/fig2_dualgraph.png" alt="Pipeline for constructing AudioHelix's DualGraph: audio chunks are segmented, transcribed/captioned, and encoded into chunk-, unit-, and semantic concept-level nodes connected via spectral clustering.">
-      <figcaption><b>Figure 2.</b> The pipeline of building DualGraph in AudioHelix. In the offline stage, the long-form audio is divided into fixed-length audio chunks, from which hierarchical fine-grained language and acoustic information is extracted to construct the graph. The resulting graph forms a hierarchical structure with three levels, namely the chunk-, unit-, and semantic concept-level.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<hr class="sep">
-
-<section>
   <div class="container-wide">
     <h2>Qualitative Examples</h2>
     <p class="centered spec-caption" style="color:var(--text-dim);">
@@ -533,38 +506,6 @@ footer a { color: var(--text-dim); }
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<hr class="sep">
-
-<section>
-  <div class="container">
-    <h2>Results</h2>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr><th>Method</th><th>TraceAV</th><th>MMAU-Pro</th><th>AM</th></tr>
-        </thead>
-        <tbody>
-          <tr class="tbl-group"><td>Audio-Flamingo-3</td><td class="second">56.9</td><td class="second">50.7</td><td class="second">57.3</td></tr>
-          <tr><td class="tbl-indent">+ LinearRAG</td><td>54.4</td><td>48.0</td><td>56.1</td></tr>
-          <tr><td class="tbl-indent">+ PlanRAG-Audio</td><td>37.5</td><td>34.0</td><td>30.8</td></tr>
-          <tr class="row-ours"><td class="tbl-indent">+ AudioHelix</td><td class="best">59.4</td><td class="best">52.3</td><td class="best">58.5</td></tr>
-
-          <tr class="tbl-group"><td>Voxtral-3B</td><td class="second">48.1</td><td>40.9</td><td class="second">56.4</td></tr>
-          <tr><td class="tbl-indent">+ LinearRAG</td><td>38.9</td><td class="second">53.1</td><td>52.3</td></tr>
-          <tr><td class="tbl-indent">+ PlanRAG-Audio</td><td>44.6</td><td>35.4</td><td>39.0</td></tr>
-          <tr class="row-ours"><td class="tbl-indent">+ AudioHelix</td><td class="best">50.6</td><td class="best">56.5</td><td class="best">57.9</td></tr>
-
-          <tr class="tbl-group"><td>Qwen3-Omni-30B</td><td class="second">71.3</td><td class="second">66.1</td><td class="second">63.7</td></tr>
-          <tr><td class="tbl-indent">+ LinearRAG</td><td>62.2</td><td>61.5</td><td>61.9</td></tr>
-          <tr><td class="tbl-indent">+ PlanRAG-Audio</td><td>55.3</td><td>34.4</td><td>37.0</td></tr>
-          <tr class="row-ours"><td class="tbl-indent">+ AudioHelix</td><td class="best">71.6</td><td class="best">67.2</td><td class="best">66.1</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="table-caption"><b>Table 1.</b> Performance comparison on TraceAV-Bench, MMAU-Pro, and AudioMarathon. Metrics are accuracy for TraceAV-Bench and MMAU-Pro, and F1 score for AudioMarathon.</p>
   </div>
 </section>
 
