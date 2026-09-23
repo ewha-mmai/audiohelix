@@ -153,6 +153,7 @@ figure img {
   border-radius: 8px;
   border: 1px solid var(--border);
 }
+figure img.fig-narrow { max-width: 680px; width: 100%; }
 figcaption {
   font-size: 14px;
   color: var(--text-dim);
@@ -248,6 +249,18 @@ tbody tr:last-child td { border-bottom: none; }
 .best { color: var(--accent); font-weight: 700; }
 .second { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--text-faint); }
 .tbl-note { font-size: 13px; color: var(--text-faint); margin-top: 8px; text-align: center; }
+.table-caption {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 12px auto 0;
+  max-width: 760px;
+  text-align: left;
+}
+.table-caption b { color: var(--text); font-weight: 600; }
+tr.tbl-group td { font-weight: 600; }
+.tbl-indent { padding-left: 30px; color: var(--text-dim); font-weight: 400; }
+.row-ours .tbl-indent { color: var(--accent); font-weight: 700; }
 
 /* BibTeX */
 .bibtex-box {
@@ -297,6 +310,85 @@ footer a { color: var(--text-dim); }
   .method-cards { grid-template-columns: 1fr; }
   .hero { padding: 40px 0 20px; }
 }
+
+/* Retrieval example (spectrogram + synced player + QA card) */
+.container-wide { max-width: 1360px; margin: 0 auto; padding: 0 24px; }
+.spec-caption { max-width: 980px; margin-bottom: 8px; }
+.retrieval-example { margin-top: 30px; }
+.retrieval-example:first-of-type { margin-top: 28px; }
+.example-label {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-dim); margin: 0 0 10px;
+}
+.example-sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+.spectro-wrap {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+}
+.spectro-wrap img { display: block; width: 100%; height: auto; }
+.playhead {
+  position: absolute;
+  width: 2px;
+  background: var(--accent2);
+  box-shadow: 0 0 5px rgba(168,85,247,.65);
+  pointer-events: none;
+}
+.spectro-legend {
+  display: flex; gap: 22px; justify-content: center;
+  margin: 10px 0 0;
+  font-size: 13px; color: var(--text-dim);
+}
+.spectro-legend .sw {
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.spectro-legend i { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.sw-oracle { background: #60A5FA; }
+.sw-ours { background: #86EFAC; }
+
+.audio-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+.audio-row audio { flex: 1; }
+.audio-row .audio-label { font-family: var(--mono); font-size: 11.5px; color: var(--text-faint); white-space: nowrap; }
+
+.qa-card {
+  margin-top: 28px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 26px;
+  background: var(--bg-alt);
+}
+.qa-tag {
+  display: inline-block;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 8px;
+}
+.qa-question { font-size: 16px; font-weight: 600; line-height: 1.6; margin: 0 0 18px; max-width: none; }
+.qa-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.qa-option {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 12px 40px 12px 14px;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: var(--bg);
+  font-size: 14px; line-height: 1.55; color: var(--text-dim);
+  position: relative;
+}
+.qa-letter { font-family: var(--mono); font-weight: 700; color: var(--text-faint); flex-shrink: 0; }
+.qa-correct { border-color: var(--accent); background: #f4f3fe; color: var(--text); }
+.qa-correct .qa-letter { color: var(--accent); }
+.qa-check {
+  position: absolute; top: 10px; right: 12px;
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .qa-options { grid-template-columns: 1fr; }
+}
+.bottom-space { height: 350px; }
 </style>
 </head>
 <body>
@@ -326,5 +418,195 @@ footer a { color: var(--text-dim); }
   </div>
 </section>
 
+<hr class="sep">
+
+<section>
+  <div class="container">
+    <h2>The Problem</h2>
+    <p class="centered" style="color:var(--text-dim);">
+      Answering questions about long-form audio often requires connecting evidence across distant moments. Existing approaches either process the entire recording at high computational cost or retrieve isolated chunks, missing the connections between complementary evidence.
+    </p>
+    <figure>
+      <img class="fig-narrow" src="static/images/fig1_problem.png" alt="Two example dialogues: a user asks a multi-hop question about a long recording, and the answer draws on several distant, linked spans of the audio.">
+      <figcaption><b>Figure 1.</b> Long-form and multi-hop audio reasoning requires concentrating on different hops to answer each query.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section>
+  <div class="container">
+    <h2>Method</h2>
+    <figure>
+      <img src="static/images/fig2_dualgraph.png" alt="Pipeline for constructing AudioHelix's DualGraph: audio chunks are segmented, transcribed/captioned, and encoded into chunk-, unit-, and semantic concept-level nodes connected via spectral clustering.">
+      <figcaption><b>Figure 2.</b> The pipeline of building DualGraph in AudioHelix. In the offline stage, the long-form audio is divided into fixed-length audio chunks, from which hierarchical fine-grained language and acoustic information is extracted to construct the graph. The resulting graph forms a hierarchical structure with three levels, namely the chunk-, unit-, and semantic concept-level.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section>
+  <div class="container-wide">
+    <h2>Qualitative Examples</h2>
+    <p class="centered spec-caption" style="color:var(--text-dim);">
+      Mel spectrogram of the full original audio. Blue bands are oracle events; green ticks are AudioHelix's retrieved 5&nbsp;s units.<br>Play the audio or click the spectrogram to seek.
+    </p>
+
+    <div class="retrieval-example">
+      <h3 class="example-label">video300</h3>
+      <div class="spectro-wrap" data-video="video300" data-left="0.058" data-right="0.997" data-top="0.03" data-bottom="0.85" data-duration="2007.4135">
+        <img src="static/images/video300_mel_web.png" alt="Mel spectrogram of video300 with oracle events (blue) and AudioHelix's retrieved 5s units (green)">
+        <div class="playhead"></div>
+      </div>
+      <div class="spectro-legend">
+        <span class="sw"><i class="sw-oracle"></i> Oracle event</span>
+        <span class="sw"><i class="sw-ours"></i> Ours: retrieved 5&nbsp;s unit</span>
+      </div>
+      <div class="audio-row">
+        <span class="audio-label">ORIGINAL AUDIO</span>
+        <audio controls preload="metadata" src="static/audio/video300_original.mp3"></audio>
+      </div>
+      <div class="qa-card">
+        <span class="qa-tag">Query</span>
+        <p class="qa-question">As the performance shifts from the large male dancer group to the solo unicyclist and then into the later mixed unicycle/dancer rope and pyramid segments, how does the background music behave across these transitions?</p>
+        <div class="qa-options">
+          <div class="qa-option">
+            <span class="qa-letter">A</span>
+            <span>Each segment (male dancers, solo unicyclist, and later mixed unicycle/dancer acts) uses its own distinct track, with noticeable changes in tempo and instrumentation at every transition.</span>
+          </div>
+          <div class="qa-option">
+            <span class="qa-letter">B</span>
+            <span>The soundtrack starts as full EDM for the male dancers, then drops to a sparse, drum-only percussive section during the solo unicyclist, before adding melodies back in only for the later unicycle pyramids.</span>
+          </div>
+          <div class="qa-option qa-correct">
+            <span class="qa-letter">C</span>
+            <span>A single, upbeat, driving electronic dance track with synth melodies and strong percussion continues across all of these segments without changing to a different musical style.</span>
+            <span class="qa-check">&#10003; Correct</span>
+          </div>
+          <div class="qa-option">
+            <span class="qa-letter">D</span>
+            <span>The music switches from upbeat EDM during the large male dancer group to a slower, more acoustic-style track for the solo unicyclist, then returns to EDM for the mixed unicycle/dancer segments.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="example-sep">
+
+    <div class="retrieval-example">
+      <h3 class="example-label">video339</h3>
+      <div class="spectro-wrap" data-video="video339" data-left="0.058" data-right="0.997" data-top="0.03" data-bottom="0.85" data-duration="1838.2135">
+        <img src="static/images/video339_mel_web.png" alt="Mel spectrogram of video339 with oracle events (blue) and AudioHelix's retrieved 5s units (green)">
+        <div class="playhead"></div>
+      </div>
+      <div class="spectro-legend">
+        <span class="sw"><i class="sw-oracle"></i> Oracle event</span>
+        <span class="sw"><i class="sw-ours"></i> Ours: retrieved 5&nbsp;s unit</span>
+      </div>
+      <div class="audio-row">
+        <span class="audio-label">ORIGINAL AUDIO</span>
+        <audio controls preload="metadata" src="static/audio/video339_original.mp3"></audio>
+      </div>
+      <div class="qa-card">
+        <span class="qa-tag">Query</span>
+        <p class="qa-question">According to the narrator, how did Miuccia Prada&rsquo;s early use of nylon eventually lead to the Linea Rossa/Prada Sport concept, and how was that line later positioned within Prada&rsquo;s collections and strategy?</p>
+        <div class="qa-options">
+          <div class="qa-option qa-correct">
+            <span class="qa-letter">A</span>
+            <span>Miuccia first reinvented Prada by unveiling waterproof nylon bags, and this nylon innovation later evolved into the high-end, functional Prada Sport line in 1997; decades afterward, its Linea Rossa identity was folded back into the Fall/Winter 2018 collections and explicitly cited as a key &lsquo;reintroduction&rsquo; in Prada&rsquo;s future-focused investment strategy.</span>
+            <span class="qa-check">&#10003; Correct</span>
+          </div>
+          <div class="qa-option">
+            <span class="qa-letter">B</span>
+            <span>Miuccia&rsquo;s early nylon accessories directly inspired the launch of Miu Miu as a playful sub-label, which then introduced the red-line branding; this Miu Miu red stripe was subsequently absorbed into Prada&rsquo;s main runway in 2018 and mentioned alongside Raf Simons as the sole driver of Prada&rsquo;s future.</span>
+          </div>
+          <div class="qa-option">
+            <span class="qa-letter">C</span>
+            <span>After nylon bags boosted Prada&rsquo;s popularity, the material was largely abandoned when Neil Barrett arrived, as Prada Sport was framed as a leather-based luxury line; Linea Rossa resurfaced only as a nostalgic capsule for Fall/Winter 2018 and was portrayed as separate from Prada&rsquo;s broader strategic investments.</span>
+          </div>
+          <div class="qa-option">
+            <span class="qa-letter">D</span>
+            <span>Miuccia&rsquo;s nylon work laid the groundwork for Neil Barrett&rsquo;s minimalist menswear, but the narrator stresses that Prada Sport was purely about elegant tailoring with no real link to nylon, and that Linea Rossa&rsquo;s 2018 appearance was a brief revival not referenced in the discussion of Prada&rsquo;s long-term plans.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section>
+  <div class="container">
+    <h2>Results</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Method</th><th>TraceAV</th><th>MMAU-Pro</th><th>AM</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tbl-group"><td>Audio-Flamingo-3</td><td class="second">56.9</td><td class="second">50.7</td><td class="second">57.3</td></tr>
+          <tr><td class="tbl-indent">+ LinearRAG</td><td>54.4</td><td>48.0</td><td>56.1</td></tr>
+          <tr><td class="tbl-indent">+ PlanRAG-Audio</td><td>37.5</td><td>34.0</td><td>30.8</td></tr>
+          <tr class="row-ours"><td class="tbl-indent">+ AudioHelix</td><td class="best">59.4</td><td class="best">52.3</td><td class="best">58.5</td></tr>
+
+          <tr class="tbl-group"><td>Voxtral-3B</td><td class="second">48.1</td><td>40.9</td><td class="second">56.4</td></tr>
+          <tr><td class="tbl-indent">+ LinearRAG</td><td>38.9</td><td class="second">53.1</td><td>52.3</td></tr>
+          <tr><td class="tbl-indent">+ PlanRAG-Audio</td><td>44.6</td><td>35.4</td><td>39.0</td></tr>
+          <tr class="row-ours"><td class="tbl-indent">+ AudioHelix</td><td class="best">50.6</td><td class="best">56.5</td><td class="best">57.9</td></tr>
+
+          <tr class="tbl-group"><td>Qwen3-Omni-30B</td><td class="second">71.3</td><td class="second">66.1</td><td class="second">63.7</td></tr>
+          <tr><td class="tbl-indent">+ LinearRAG</td><td>62.2</td><td>61.5</td><td>61.9</td></tr>
+          <tr><td class="tbl-indent">+ PlanRAG-Audio</td><td>55.3</td><td>34.4</td><td>37.0</td></tr>
+          <tr class="row-ours"><td class="tbl-indent">+ AudioHelix</td><td class="best">71.6</td><td class="best">67.2</td><td class="best">66.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-caption"><b>Table 1.</b> Performance comparison on TraceAV-Bench, MMAU-Pro, and AudioMarathon. Metrics are accuracy for TraceAV-Bench and MMAU-Pro, and F1 score for AudioMarathon.</p>
+  </div>
+</section>
+
+<div class="bottom-space" aria-hidden="true"></div>
+
 </body>
+<script>
+/* ---- Spectrogram <-> audio playhead sync (one per .retrieval-example) ---- */
+(function(){
+  document.querySelectorAll('.spectro-wrap[data-video]').forEach(function (wrap) {
+    var geom = {
+      left: parseFloat(wrap.dataset.left),
+      right: parseFloat(wrap.dataset.right),
+      top: parseFloat(wrap.dataset.top),
+      bottom: parseFloat(wrap.dataset.bottom),
+      duration: parseFloat(wrap.dataset.duration)
+    };
+    var playhead = wrap.querySelector('.playhead');
+    var audio = wrap.closest('.retrieval-example').querySelector('audio');
+    if (!playhead || !audio) return;
+
+    playhead.style.top = (geom.top * 100) + '%';
+    playhead.style.height = ((geom.bottom - geom.top) * 100) + '%';
+
+    function setFromTime(t) {
+      var frac = geom.left + Math.min(Math.max(t / geom.duration, 0), 1) * (geom.right - geom.left);
+      playhead.style.left = (frac * 100) + '%';
+    }
+    setFromTime(0);
+
+    audio.addEventListener('timeupdate', function () { setFromTime(audio.currentTime); });
+
+    wrap.addEventListener('click', function (e) {
+      var rect = wrap.getBoundingClientRect();
+      var xFrac = (e.clientX - rect.left) / rect.width;
+      var t = ((xFrac - geom.left) / (geom.right - geom.left)) * geom.duration;
+      if (t >= 0 && t <= geom.duration) {
+        audio.currentTime = t;
+        audio.play();
+      }
+    });
+  });
+})();
+</script>
 </html>
