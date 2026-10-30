@@ -13,8 +13,7 @@ Eunsang Lee<sup>\*</sup>, Taein Ju<sup>\*</sup>, Jiyoung Lee<sup>†</sup>
 ## Abstract
 <img src="./assets/figure2.png" alt="The pipeline of building DualGraph in AudioHelix" width="900"/>
 
-Large audio language models (LALMs) struggle with long-form audio reasoning, as processing entire recordings often limits to capture query-relevant content distributed across distant segments while incurring substantial computational cost.  
-We introduce ***AudioHelix***, a hierarchical ***DualGraph*** framework tailored for LALMs' retrieval-augmented generation (RAG) systems. Unlike existing text-only or non-graph RAG approaches, ***AudioHelix*** connects related textual and acoustic evidence across temporally distant segments for multi-hop reasoning. Extensive experiments on TraceAV-Bench, MMAU-Pro, and AudioMarathon demonstrate that ***AudioHelix*** consistently outperforms full-audio processing and existing RAG methods.
+Large audio language models (LALMs) struggle with long-form audio reasoning, as processing entire recordings often limits to capture query-relevant content distributed across distant segments while incurring substantial computational cost. We introduce ***AudioHelix***, a hierarchical ***DualGraph*** framework tailored for LALMs' retrieval-augmented generation (RAG) systems. Unlike existing text-only or non-graph RAG approaches, ***AudioHelix*** connects related textual and acoustic evidence across temporally distant segments for multi-hop reasoning. Extensive experiments on TraceAV-Bench, MMAU-Pro, and AudioMarathon demonstrate that ***AudioHelix*** consistently outperforms full-audio processing and existing RAG methods.
 
 ## Requirements
 
