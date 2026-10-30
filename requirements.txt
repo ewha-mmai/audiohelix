@@ -1,0 +1,26 @@
+# AudioHelix -- Python dependencies (`pip install -r requirements.txt`, see README).
+
+torch==2.6.0
+torchvision==0.21.0  # qwen_omni_utils imports it at module top level, audio-only runs included
+transformers @ git+https://github.com/huggingface/transformers@6ec0f83563f56335d4227354614459a01d76ba0d
+qwen-omni-utils==0.0.9
+numpy==2.2.6
+pandas==2.3.3
+pyarrow==25.0.1  # the embedding store and MMAU-Pro's predictions are parquet
+mistral-common==1.11.7  # Voxtral's MistralCommonBackend tokenizer (tekken.json)
+scikit-learn==1.7.2
+soundfile==0.14.0
+librosa==0.11.0
+python-igraph==1.0.0
+
+# transformers is pinned by git commit: Audio Flamingo 3 support lives in a
+# pre-release build, so no `transformers==<version>` on PyPI resolves to it
+# (that commit's version string reads 5.16.0.dev0).
+#
+# accelerate is optional for this transformers build (it dispatches
+# `device_map` itself and only version-checks accelerate when it is present);
+# the reference environment has accelerate==1.14.0 installed.
+
+# benches/mmau_pro/scoring/score_mmau_pro.py runs in the *base* env, not this
+# one: it calls the official MMAU-Pro scoring code (evaluate_mmau_pro_comprehensive)
+# and its NVEmbed-v2 judge, which bring their own dependencies.

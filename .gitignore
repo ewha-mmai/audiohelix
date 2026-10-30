@@ -1,0 +1,64 @@
+# Python bytecode and tooling
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build and packaging output
+/build/
+/dist/
+*.whl
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Benchmark data and generated artifacts
+# Keep source code under audiohelix/build/; these rules only match data dirs.
+**/data/
+**/results/
+**/logs/
+**/cache/
+**/checkpoints/
+
+# Local manifests, snapshots, and intermediate copies
+*.full
+*_snapshot.py
+
+# Audio, embedding, model, and graph artifacts
+*.wav
+*.mp3
+*.flac
+*.npy
+*.npz
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+*.onnx
+*.graphml
+*.parquet
+
+# Runtime logs and temporary files
+*.log
+nohup.out
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
