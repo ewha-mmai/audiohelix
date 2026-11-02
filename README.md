@@ -6,8 +6,8 @@ Eunsang Lee<sup>\*</sup>, Taein Ju<sup>\*</sup>, Jiyoung Lee<sup>†</sup>
 <sup>†</sup>Corresponding author
 
 <div>
-<!--     <a href=""><img src="https://img.shields.io/badge/arXiv-2610.XXXXX-b31b1b.svg" height=22.5></a> -->
-    <a href="http://mmai.ewha.ac.kr/audiohelix/"><img src="https://img.shields.io/badge/Qualitative_Results-Page-blue"" height=22.5></a>
+    <a href="https://arxiv.org/abs/2610.41390"><img src="https://img.shields.io/badge/arXiv-2610.41390-b31b1b.svg" height=22.5></a>
+    <a href="http://mmai.ewha.ac.kr/audiohelix/"><img src="https://img.shields.io/badge/Page-Qualitative_Results-blue"" height=22.5></a>
 </div>
 
 ## Abstract
