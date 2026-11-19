@@ -111,7 +111,11 @@ def make_unit_wavs(
 ) -> List[UnitRecord]:
     """Splits each chunk into unit_sec-long wavs under out_dir/{video_id}/,
     cut directly from the source using the chunk's global start/end so the
-    result matches re-cutting the chunk wav. unit_id is {chunk_id}_a{seq:02d}."""
+    result matches re-cutting the chunk wav. unit_id is {chunk_id}_a{seq:02d}.
+    Returns an empty list without reading audio when there are no chunks."""
+    if not chunk_records:
+        return []
+
     video_out_dir = Path(out_dir) / chunk_records[0].video_id
     video_out_dir.mkdir(parents=True, exist_ok=True)
 
