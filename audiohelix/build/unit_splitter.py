@@ -1,13 +1,14 @@
 from __future__ import annotations
 
+import re
 from typing import List
 
 
 def split_into_units(text: str) -> List[str]:
-    """"A dog barks. Music plays softly." -> ["A dog barks.", "Music plays softly."]"""
+    """Split on periods except when they are between digits, e.g. in 21.5."""
     if not text or not text.strip():
         return []
-    parts = text.split(".")
+    parts = re.split(r"(?<!\d)\.|\.(?!\d)", text)
     units = []
     for part in parts:
         part = part.strip()
